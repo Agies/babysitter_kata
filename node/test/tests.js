@@ -34,12 +34,24 @@ describe('Baby sitter calculator', function(){
       }, /bed time must be valid/);
     });
     it('should pay 36 before bed for 3 hours', function(){
-      var amount = sut.calculate("5:00PM", "4:00", "8:00PM");
+      var amount = sut.calculate("5:00PM", "8:00PM", "8:00PM");
       assert.equal(amount, 36);
     });
     it('should pay 12/hr before bed equaling 48 dollars, if 4 hrs', function(){
-      var amount = sut.calculate("5:00PM", "12:00AM", "9:00PM");
+      var amount = sut.calculate("5:00PM", "9:00PM", "9:00PM");
       assert.equal(amount, 48);
+    }); 
+    it('should pay 0 pred bedtime if start time after bedtime', function(){
+      var amount = sut.calculate("11:00PM", "8:00PM", "8:00PM");
+      assert.equal(amount, 0);
+    }); 
+    it('should pay 32 after bed and before midnight', function(){
+      var amount = sut.calculate("11:00PM", "24:00AM", "8:00PM");
+      assert.equal(amount, 32);
+    }); 
+    it('should pay 40 after bed and before midnight', function(){
+      var amount = sut.calculate("11:00PM", "24:00AM", "7:00PM");
+      assert.equal(amount, 40);
     }); 
   })
 });
