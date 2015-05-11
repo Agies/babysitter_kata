@@ -15,7 +15,9 @@ calculator.calculate = function(startTime, leaveTime, bedTime) {
 		midnight = moment("24:00", "hh:mma"),
 		beforeBedTimeAmount,
 		afterBedTimeBeforeMidnight,
-		afterBedTimeBeforeMidnightAmount;
+		afterBedTimeBeforeMidnightAmount,
+		afterMidnight = 0,
+		afterMidnightAmount = 0;
 	if (!startTime) throw "start time required";
 	if (!leaveTime) throw "leave time required";
 	if (!bedTime) throw "bed time required";
@@ -28,10 +30,21 @@ calculator.calculate = function(startTime, leaveTime, bedTime) {
 	if (parsedStartTime.hour() < calculator.minStartTime) throw "start time must be after 5PM";
 	if (parsedLeaveTime.hour() > calculator.maxLeaveTime &&  parsedLeaveTime.hour() < calculator.minStartTime) throw "leave time must be before 4AM";
 	if (parsedLeaveTime.diff(parsedStartTime, 'days') > 1) throw "difference between start time and leave time cannot be more than one day";
+	
 	beforeBedTime = parsedBedTime.diff(parsedStartTime, 'hours');
 	beforeBedTimeAmount = beforeBedTime > 0 ? (beforeBedTime * calculator.beforeBedtimePayment) : 0;
+	
 	afterBedTimeBeforeMidnight = moment.min(parsedLeaveTime, midnight).diff(parsedBedTime, 'hours');
-	afterBedTimeBeforeMidnightAmount = afterBedTimeBeforeMidnight > 0 ? (afterBedTimeBeforeMidnight * calculator.bedtimeToMidnightPayment) : 0; 
-	return beforeBedTimeAmount + afterBedTimeBeforeMidnightAmount; 
+	afterBedTimeBeforeMidnightAmount = afterBedTimeBeforeMidnight > 0 ? (afterBedTimeBeforeMidnight * calculator.bedtimeToMidnightPayment) : 0;
+	
+	afterMidnight = parsedLeaveTime.diff(midnight, "hours");
+	
+	afterMidnightAmount = afterMidnight > 0 ? (afterMidnight * calculator.afterMidnightPayment) : 0;
+	console.log({
+		before: {diff: beforeBedTime, amount: beforeBedTimeAmount},
+		after: {diff: afterBedTimeBeforeMidnight, amount: afterBedTimeBeforeMidnightAmount},
+		midnight: {diff:afterMidnight, amount: afterMidnightAmount}
+	});
+	return beforeBedTimeAmount + afterBedTimeBeforeMidnightAmount + afterMidnightAmount; 
 };
 module.exports = calculator; 

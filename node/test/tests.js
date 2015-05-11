@@ -9,6 +9,12 @@ describe('Baby sitter calculator', function(){
     assert.equal(typeof sut.calculate, 'function');
   });
   describe('calculate function', function(){
+    beforeEach(function(done){
+      sut.beforeBedtimePayment = 12;
+      sut.bedtimeToMidnightPayment = 8;
+      sut.afterMidnightPayment = 16;
+      done();
+    });
     it('should require a start time AND leave time AND bed time', function(){
       sut.calculate("17:00", "17:00", "17:00");
     });
@@ -41,7 +47,7 @@ describe('Baby sitter calculator', function(){
       var amount = sut.calculate("5:00PM", "9:00PM", "9:00PM");
       assert.equal(amount, 48);
     }); 
-    it('should pay 0 pred bedtime if start time after bedtime', function(){
+    it('should pay 0 pre-bedtime if start time after bedtime', function(){
       var amount = sut.calculate("11:00PM", "8:00PM", "8:00PM");
       assert.equal(amount, 0);
     }); 
@@ -52,6 +58,17 @@ describe('Baby sitter calculator', function(){
     it('should pay 8/hr after bed and before midnight', function(){
       var amount = sut.calculate("11:00PM", "24:00AM", "7:00PM");
       assert.equal(amount, 40);
+    });
+    it('should pay 16 after midnight, if 1hr', function(){
+      sut.beforeBedtimePayment = 0;
+      var amount = sut.calculate("7:00PM", "25:00AM", "24:00AM");
+      assert.equal(amount, 16);
     }); 
+    it('should pay 16 after midnight, if 1hr', function(){
+      sut.beforeBedtimePayment = 0;
+      var amount = sut.calculate("7:00PM", "25:00AM", "24:00AM");
+      assert.equal(amount, 16);
+    });
+    
   })
 });
