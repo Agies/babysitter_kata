@@ -20,6 +20,9 @@ describe('Baby sitter calculator', function(){
     });
     it('should require a leave time to be parsable', function(){
       sut.calculate("6:00PM", "1");
-    });    
+    });
+    it('should require a leave time to be no later than 4AM the following day', function(){
+      sut.calculate("5:00PM", "4:00");
+    }); 
   })
 });
