@@ -32,6 +32,14 @@ describe('Baby sitter calculator', function(){
       assert.throws(function(){
         sut.calculate("5:00PM", "4:00", "blah");        
       }, /bed time must be valid/);
+    });
+    it('should pay 36 before bed for 3 hours', function(){
+      var amount = sut.calculate("5:00PM", "4:00", "8:00PM");
+      assert.equal(amount, 36);
+    });
+    it('should pay 12/hr before bed equaling 48 dollars, if 4 hrs', function(){
+      var amount = sut.calculate("5:00PM", "12:00AM", "9:00PM");
+      assert.equal(amount, 48);
     }); 
   })
 });

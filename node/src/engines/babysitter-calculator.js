@@ -3,6 +3,7 @@ var moment = require("moment"),
 calculator.timeMatch = /^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?([A,P,a,p][M,m])?$/;
 calculator.minStartTime = 17;
 calculator.maxLeaveTime = 4;
+calculator.beforeBedtimePayment = 12;
 calculator.calculate = function(startTime, leaveTime, bedTime) {
 	'use strict';
 	var parsedStartTime,
@@ -19,6 +20,7 @@ calculator.calculate = function(startTime, leaveTime, bedTime) {
 	if (!calculator.timeMatch.test(bedTime)) throw "bed time must be valid";
 	if (parsedStartTime.hour() < calculator.minStartTime) throw "start time must be after 5PM";
 	if (parsedLeaveTime.hour() > calculator.maxLeaveTime &&  parsedLeaveTime.hour() < calculator.minStartTime) throw "leave time must be before 4AM";
-	if (parsedStartTime.diff(parsedLeaveTime, 'days') > 1) throw "difference between start time and leave time cannot be more than one day";
+	if (parsedLeaveTime.diff(parsedStartTime, 'days') > 1) throw "difference between start time and leave time cannot be more than one day";
+	return parsedBedTime.diff(parsedStartTime, 'hours') * calculator.beforeBedtimePayment;
 };
 module.exports = calculator; 
