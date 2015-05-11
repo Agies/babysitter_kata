@@ -1,9 +1,8 @@
 var assert = require("assert");
 var sut = require("../src/engines/babysitter-calculator");
-describe('', function(){
-  describe('', function(){
-    it('', function(){
-     
-    })
+describe('Baby sitter calculator', function(){
+  
+  describe('Calculate', function(){
+    
   })
 });
