@@ -10,7 +10,13 @@ describe('Baby sitter calculator', function(){
   });
   describe('calculate function', function(){
     it('should require a start time', function(){
-      sut.calculate("1");
+      sut.calculate("17");
+    });
+    it('should require a start time to be parsable', function(){
+      sut.calculate("6:00PM");
+    });
+    it('should require a start time to be no earlier than 5PM', function(){
+      sut.calculate("5:00PM");
     });
   })
 });
