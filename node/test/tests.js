@@ -13,13 +13,17 @@ describe('Baby sitter calculator', function(){
       sut.calculate("17:00", "17:00", "17:00");
     });
     it('should require a start time to be parsable', function(){
-      sut.calculate("6:00PM", "1:00", "8:00PM");
+      assert.throws(function(){
+        sut.calculate("blah", "4:00", "08:00PM");        
+      }, /start time must be valid/);
     });
     it('should require a start time to be no earlier than 5PM', function(){
       sut.calculate("5:00PM", "1:00", "8:00PM");
     });
     it('should require a leave time to be parsable', function(){
-      sut.calculate("6:00PM", "1:00", "8:00PM");
+      assert.throws(function(){
+        sut.calculate("5:00PM", "blah", "8:00PM");        
+      }, /leave time must be valid/);
     });
     it('should require a leave time to be no later than 4AM the following day', function(){
       sut.calculate("5:00PM", "4:00", "8:00PM");
