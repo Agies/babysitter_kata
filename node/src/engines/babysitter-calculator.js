@@ -5,6 +5,7 @@ calculator.minStartTime = 17;
 calculator.maxLeaveTime = 4;
 calculator.beforeBedtimePayment = 12;
 calculator.bedtimeToMidnightPayment = 8;
+calculator.afterMidnightPayment = 16;
 calculator.calculate = function(startTime, leaveTime, bedTime) {
 	'use strict';
 	var parsedStartTime,

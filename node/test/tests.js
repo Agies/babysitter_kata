@@ -45,11 +45,11 @@ describe('Baby sitter calculator', function(){
       var amount = sut.calculate("11:00PM", "8:00PM", "8:00PM");
       assert.equal(amount, 0);
     }); 
-    it('should pay 32 after bed and before midnight', function(){
+    it('should pay 32 after bed and before midnight, if 4hrs', function(){
       var amount = sut.calculate("11:00PM", "24:00AM", "8:00PM");
       assert.equal(amount, 32);
     }); 
-    it('should pay 40 after bed and before midnight', function(){
+    it('should pay 8/hr after bed and before midnight', function(){
       var amount = sut.calculate("11:00PM", "24:00AM", "7:00PM");
       assert.equal(amount, 40);
     }); 
