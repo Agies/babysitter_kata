@@ -69,6 +69,9 @@ describe('Baby sitter calculator', function(){
       var amount = sut.calculate("7:00PM", "25:00AM", "24:00AM");
       assert.equal(amount, 16);
     });
-    
-  })
+    it('should pay only for whole hours', function(){
+      var amount = sut.calculate("5:15PM", "25:45AM", "8:00PM");
+      assert.equal(amount, 72);
+    });
+  });
 });
