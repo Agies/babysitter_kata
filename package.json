@@ -10,10 +10,12 @@
     "moment": "^2.10.2"
   },
   "devDependencies": {
-    "chai": "^2.3.0"
+    "chai": "^2.3.0",
+    "mocha": "^2.2.4",
+    "moment": "^2.10.2"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC"
