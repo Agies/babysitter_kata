@@ -1,5 +1,12 @@
-# babysitter kata
+#Good Morning
+This is my babysitter kata written in Node.
 
-##Contains
+##Run Tests
+$ npm install -g mocha
 
-* Example Node Date Input or Time Input Calculator
+$ mocha
+
+##Nodemon Runner
+$ npm install -g nodemon
+
+$ nodemon -x "npm test"
