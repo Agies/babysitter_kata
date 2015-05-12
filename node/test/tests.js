@@ -18,6 +18,21 @@ describe('Baby sitter calculator', function(){
     it('should require a start time AND leave time AND bed time', function(){
       sut.calculate("17:00", "17:00", "17:00");
     });
+    it('should require a start time', function(){
+      assert.throws(function(){
+        sut.calculate("", "4:00", "08:00PM");        
+      }, /start time required/);
+    });
+    it('should require a leave time', function(){
+      assert.throws(function(){
+        sut.calculate("17:00", "", "08:00PM");        
+      }, /leave time required/);
+    });
+    it('should require a bed time', function(){
+      assert.throws(function(){
+        sut.calculate("17:00", "4:00", "");        
+      }, /bed time required/);
+    });
     it('should require a start time to be parsable', function(){
       assert.throws(function(){
         sut.calculate("blah", "4:00", "08:00PM");        
