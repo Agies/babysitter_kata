@@ -38,8 +38,8 @@ calculator.calculate = function(startTime, leaveTime, bedTime) {
 	afterBedTimeBeforeMidnightAmount = afterBedTimeBeforeMidnight > 0 ? (afterBedTimeBeforeMidnight * calculator.bedtimeToMidnightPayment) : 0;
 	
 	afterMidnight = parsedLeaveTime.diff(midnight, "hours");
-	
 	afterMidnightAmount = afterMidnight > 0 ? (afterMidnight * calculator.afterMidnightPayment) : 0;
+	
 	console.log({
 		before: {diff: beforeBedTime, amount: beforeBedTimeAmount},
 		after: {diff: afterBedTimeBeforeMidnight, amount: afterBedTimeBeforeMidnightAmount},
